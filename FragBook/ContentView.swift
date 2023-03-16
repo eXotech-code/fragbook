@@ -8,14 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State public var orientation = UIDeviceOrientation.landscapeLeft
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        OrientationSensitiveStack(
+            orientation: $orientation,
+            editor: EditorView(),
+            preview: PreviewView()
+        )
+        .onReceive(
+            NotificationCenter.default.publisher(
+                for: UIDevice.orientationDidChangeNotification
+            )
+        ) { _ in
+            let newOrientation = UIDevice.current.orientation
+            if !(newOrientation.isFlat || newOrientation == UIDeviceOrientation.unknown) {
+                orientation = newOrientation
+            }
         }
-        .padding()
     }
 }
 

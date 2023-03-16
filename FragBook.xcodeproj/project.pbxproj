@@ -11,6 +11,11 @@
 		3B30BB3329C376F00063B763 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B30BB3229C376F00063B763 /* ContentView.swift */; };
 		3B30BB3529C376F10063B763 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B30BB3429C376F10063B763 /* Assets.xcassets */; };
 		3B30BB3829C376F10063B763 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B30BB3729C376F10063B763 /* Preview Assets.xcassets */; };
+		3B30BB3F29C378070063B763 /* EditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B30BB3E29C378070063B763 /* EditorView.swift */; };
+		3B30BB4129C37ACB0063B763 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B30BB4029C37ACB0063B763 /* PreviewView.swift */; };
+		3B30BB4529C381EB0063B763 /* OrientationSensitiveStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B30BB4429C381EB0063B763 /* OrientationSensitiveStack.swift */; };
+		3B30BB4729C39CED0063B763 /* RenderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B30BB4629C39CED0063B763 /* RenderedView.swift */; };
+		3B30BB4929C39D360063B763 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B30BB4829C39D360063B763 /* Renderer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,12 @@
 		3B30BB3229C376F00063B763 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3B30BB3429C376F10063B763 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B30BB3729C376F10063B763 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		3B30BB3E29C378070063B763 /* EditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorView.swift; sourceTree = "<group>"; };
+		3B30BB4029C37ACB0063B763 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		3B30BB4429C381EB0063B763 /* OrientationSensitiveStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrientationSensitiveStack.swift; sourceTree = "<group>"; };
+		3B30BB4629C39CED0063B763 /* RenderedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderedView.swift; sourceTree = "<group>"; };
+		3B30BB4829C39D360063B763 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		3B30BB4A29C3A6FE0063B763 /* definitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = definitions.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +64,12 @@
 			children = (
 				3B30BB3029C376F00063B763 /* FragBookApp.swift */,
 				3B30BB3229C376F00063B763 /* ContentView.swift */,
+				3B30BB4629C39CED0063B763 /* RenderedView.swift */,
+				3B30BB4829C39D360063B763 /* Renderer.swift */,
+				3B30BB4A29C3A6FE0063B763 /* definitions.h */,
+				3B30BB4429C381EB0063B763 /* OrientationSensitiveStack.swift */,
+				3B30BB4029C37ACB0063B763 /* PreviewView.swift */,
+				3B30BB3E29C378070063B763 /* EditorView.swift */,
 				3B30BB3429C376F10063B763 /* Assets.xcassets */,
 				3B30BB3629C376F10063B763 /* Preview Content */,
 			);
@@ -137,8 +154,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B30BB4529C381EB0063B763 /* OrientationSensitiveStack.swift in Sources */,
+				3B30BB3F29C378070063B763 /* EditorView.swift in Sources */,
+				3B30BB4929C39D360063B763 /* Renderer.swift in Sources */,
+				3B30BB4129C37ACB0063B763 /* PreviewView.swift in Sources */,
 				3B30BB3329C376F00063B763 /* ContentView.swift in Sources */,
 				3B30BB3129C376F00063B763 /* FragBookApp.swift in Sources */,
+				3B30BB4729C39CED0063B763 /* RenderedView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +305,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.piskiewicz.FragBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = FragBook/definitions.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -312,6 +335,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.piskiewicz.FragBook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = FragBook/definitions.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
