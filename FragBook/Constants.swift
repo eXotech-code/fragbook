@@ -6,12 +6,15 @@
 //
 
 let initialShader = """
-struct Fragment {
+#include <metal_stdlib>
+using namespace metal;
+
+struct RasterizerData {
     float4 position [[position]];
-    float4 color;
+    float2 textureCoordinate;
 };
 
-fragment float4 fragmentShader(Fragment input [[stage_in]]) {
-    return input.color;
+fragment float4 fragmentShader(RasterizerData in [[stage_in]]) {
+    return float4(float3(1.0 - in.textureCoordinate.y), 1.0);
 }
 """

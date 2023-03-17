@@ -34,6 +34,7 @@ struct StatusView: View {
             .padding()
         }
         .frame(height: 16)
+        .padding(.bottom)
     }
 }
 

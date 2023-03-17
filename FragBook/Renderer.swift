@@ -19,10 +19,10 @@ class Renderer: NSObject, MTKViewDelegate {
         self.metalCommandQueue = parent.dataModel.metalDevice.makeCommandQueue()
         
         let vertices = [
-            Vertex(position: [-1, -1], color: [1, 0, 0, 1]),
-            Vertex(position: [1, -1], color: [0, 1, 0, 1]),
-            Vertex(position: [1, 1], color: [0, 0, 1, 1]),
-            Vertex(position: [-1, 1], color: [1, 1, 1, 1])
+            Vertex(position: [-1, -1], textureCoordinate: [0.0, 1.0]),
+            Vertex(position: [1, -1], textureCoordinate: [1.0, 1.0]),
+            Vertex(position: [1, 1], textureCoordinate: [1.0, 0.0]),
+            Vertex(position: [-1, 1], textureCoordinate: [0.0, 0.0])
         ]
         
         vertexBuffer = parent.dataModel.metalDevice.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<Vertex>.stride, options: [])!

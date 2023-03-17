@@ -24,7 +24,6 @@ class DataModel : ObservableObject {
     }
     
     func compileShader(newCode: String) {
-        print("HENLO!!!")
         self.status = .compiling
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
         let defaultLibrary = metalDevice.makeDefaultLibrary()

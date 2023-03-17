@@ -7,8 +7,16 @@
 
 import SwiftUI
 
+func initialOrientation() -> UIDeviceOrientation {
+    if UIDevice.current.userInterfaceIdiom == .pad {
+        return .landscapeLeft
+    }
+    
+    return .portrait
+}
+
 struct ContentView: View {
-    @State public var orientation = UIDeviceOrientation.landscapeLeft
+    @State public var orientation = initialOrientation()
     @EnvironmentObject var dataModel: DataModel
     
     var body: some View {
@@ -33,5 +41,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(DataModel())
     }
 }

@@ -10,20 +10,20 @@ using namespace metal;
 
 #include "definitions.h"
 
-struct Fragment {
+struct RasterizerData {
     float4 position [[position]];
-    float4 color;
+    float2 textureCoordinate;
 };
 
-vertex Fragment vertexShader(
+vertex RasterizerData vertexShader(
     const device Vertex *vertexArray [[buffer(0)]],
-    unsigned int vid [[vertex_id]]
+    unsigned int vertexID [[vertex_id]]
 ) {
-    Vertex input = vertexArray[vid];
+    Vertex input = vertexArray[vertexID];
     
-    Fragment output;
-    output.position = float4(input.position.x, input.position.y, 0, 1);
-    output.color = input.color;
+    RasterizerData out;
+    out.position = float4(input.position.x, input.position.y, 0, 1);
+    out.textureCoordinate = input.textureCoordinate;
     
-    return output;
+    return out;
 }
