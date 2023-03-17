@@ -8,18 +8,14 @@
 import SwiftUI
 
 struct EditorView: View {
-    @State private var code: String = """
-    #version 460
-
-    out vec4 fragColor;
+    var code: Binding<String>
     
-    void main() {
-        fragColor = vec4(1.0, 0.0, 0.0, 1.0);
+    init(_ code: Binding<String>) {
+        self.code = code
     }
-    """
     
     var body: some View {
-        TextEditor(text: $code)
+        TextEditor(text: self.code)
             .monospaced()
             .padding()
     }
@@ -27,6 +23,14 @@ struct EditorView: View {
 
 struct EditorView_Previews: PreviewProvider {
     static var previews: some View {
-        EditorView()
+        EditorView(
+            .constant(
+                    """
+                    fragment float4 fragmentShader() {
+                        return float4(1.0, 0.0, 0.0, 1.0);
+                    }
+                    """
+            )
+        )
     }
 }

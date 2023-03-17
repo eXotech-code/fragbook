@@ -12,7 +12,7 @@
 
 struct Vertex {
     vector_float2 position;
-    vector_float3 color;
-}
+    vector_float4 color;
+};
 
 #endif /* definitions_h */

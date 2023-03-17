@@ -9,8 +9,18 @@ import SwiftUI
 import MetalKit
 
 struct RenderedView: UIViewRepresentable {
+    public var code: Binding<String>
+    let coordinator: Renderer
+    
+    init(_ code: Binding<String>) {
+        self.code = code
+        coordinator = Renderer(fragCode: code.wrappedValue)
+    }
+    
     func makeCoordinator() -> Renderer {
-        Renderer(parent: self)
+        coordinator.setParent(self)
+        coordinator.createPipelineState(with: code.wrappedValue)
+        return coordinator
     }
     
     func makeUIView(context: UIViewRepresentableContext<RenderedView>) -> MTKView {
@@ -30,12 +40,21 @@ struct RenderedView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MTKView, context: UIViewRepresentableContext<RenderedView>) {
-        
+        // Replace the old shader code with the current one.
+        coordinator.createPipelineState(with: code.wrappedValue)
     }
 }
 
 struct RenderedView_Previews: PreviewProvider {
     static var previews: some View {
-        RenderedView()
+        RenderedView(
+            .constant(
+                    """
+                    fragment float4 fragmentShader() {
+                        return float4(1.0, 0.0, 0.0, 1.0);
+                    }
+                    """
+            )
+        )
     }
 }

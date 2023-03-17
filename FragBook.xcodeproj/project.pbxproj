@@ -16,6 +16,7 @@
 		3B30BB4529C381EB0063B763 /* OrientationSensitiveStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B30BB4429C381EB0063B763 /* OrientationSensitiveStack.swift */; };
 		3B30BB4729C39CED0063B763 /* RenderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B30BB4629C39CED0063B763 /* RenderedView.swift */; };
 		3B30BB4929C39D360063B763 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B30BB4829C39D360063B763 /* Renderer.swift */; };
+		3B30BB4C29C44FC00063B763 /* Vertex.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3B30BB4B29C44FC00063B763 /* Vertex.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		3B30BB4629C39CED0063B763 /* RenderedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderedView.swift; sourceTree = "<group>"; };
 		3B30BB4829C39D360063B763 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		3B30BB4A29C3A6FE0063B763 /* definitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = definitions.h; sourceTree = "<group>"; };
+		3B30BB4B29C44FC00063B763 /* Vertex.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Vertex.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				3B30BB3229C376F00063B763 /* ContentView.swift */,
 				3B30BB4629C39CED0063B763 /* RenderedView.swift */,
 				3B30BB4829C39D360063B763 /* Renderer.swift */,
+				3B30BB4B29C44FC00063B763 /* Vertex.metal */,
 				3B30BB4A29C3A6FE0063B763 /* definitions.h */,
 				3B30BB4429C381EB0063B763 /* OrientationSensitiveStack.swift */,
 				3B30BB4029C37ACB0063B763 /* PreviewView.swift */,
@@ -157,6 +160,7 @@
 				3B30BB4529C381EB0063B763 /* OrientationSensitiveStack.swift in Sources */,
 				3B30BB3F29C378070063B763 /* EditorView.swift in Sources */,
 				3B30BB4929C39D360063B763 /* Renderer.swift in Sources */,
+				3B30BB4C29C44FC00063B763 /* Vertex.metal in Sources */,
 				3B30BB4129C37ACB0063B763 /* PreviewView.swift in Sources */,
 				3B30BB3329C376F00063B763 /* ContentView.swift in Sources */,
 				3B30BB3129C376F00063B763 /* FragBookApp.swift in Sources */,

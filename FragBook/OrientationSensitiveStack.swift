@@ -33,8 +33,24 @@ struct OrientationSensitiveStack_Previews: PreviewProvider {
     static var previews: some View {
         OrientationSensitiveStack(
             orientation: .constant(UIDeviceOrientation.landscapeLeft),
-            editor: EditorView(),
-            preview: PreviewView()
+            editor: EditorView(
+                .constant(
+                        """
+                        fragment float4 fragmentShader() {
+                            return float4(1.0, 0.0, 0.0, 1.0);
+                        }
+                        """
+                )
+            ),
+            preview: PreviewView(
+                .constant(
+                        """
+                        fragment float4 fragmentShader() {
+                            return float4(1.0, 0.0, 0.0, 1.0);
+                        }
+                        """
+                )
+            )
         )
     }
 }
