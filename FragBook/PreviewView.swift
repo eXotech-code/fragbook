@@ -8,17 +8,13 @@
 import SwiftUI
 
 struct PreviewView: View {
-    public var code: Binding<String>
-    
-    init(_ code: Binding<String>) {
-        self.code = code
-    }
+    @EnvironmentObject var dataModel: DataModel
     
     var body: some View {
         ZStack {
             Color(.secondarySystemBackground).ignoresSafeArea()
             HStack {
-                RenderedView(code)
+                RenderedView()
                     .aspectRatio(1.0, contentMode: .fit)
                     .padding()
             }
@@ -28,14 +24,6 @@ struct PreviewView: View {
 
 struct PreviewView_Previews: PreviewProvider {
     static var previews: some View {
-        PreviewView(
-            .constant(
-                    """
-                    fragment float4 fragmentShader() {
-                        return float4(1.0, 0.0, 0.0, 1.0);
-                    }
-                    """
-            )
-        )
+        PreviewView()
     }
 }

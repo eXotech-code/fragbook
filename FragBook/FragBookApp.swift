@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct FragBookApp: App {
+    @StateObject var dataModel = DataModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(dataModel)
         }
     }
 }

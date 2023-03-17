@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct OrientationSensitiveStack: View {
+    @EnvironmentObject var dataModel: DataModel
     @Binding public var orientation: UIDeviceOrientation
     let editor: EditorView
     let preview: PreviewView
@@ -17,7 +18,7 @@ struct OrientationSensitiveStack: View {
             HStack {
                 self.editor
                 self.preview
-                    .frame(width: 400)
+                        .frame(width: 400)
             }
         } else {
             VStack {
@@ -33,24 +34,8 @@ struct OrientationSensitiveStack_Previews: PreviewProvider {
     static var previews: some View {
         OrientationSensitiveStack(
             orientation: .constant(UIDeviceOrientation.landscapeLeft),
-            editor: EditorView(
-                .constant(
-                        """
-                        fragment float4 fragmentShader() {
-                            return float4(1.0, 0.0, 0.0, 1.0);
-                        }
-                        """
-                )
-            ),
-            preview: PreviewView(
-                .constant(
-                        """
-                        fragment float4 fragmentShader() {
-                            return float4(1.0, 0.0, 0.0, 1.0);
-                        }
-                        """
-                )
-            )
+            editor: EditorView(),
+            preview: PreviewView()
         )
     }
 }

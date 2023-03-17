@@ -9,17 +9,13 @@ import SwiftUI
 
 struct ContentView: View {
     @State public var orientation = UIDeviceOrientation.landscapeLeft
-    @State public var code = """
-    fragment float4 fragmentShader() {
-        return float4(1.0, 0.0, 0.0, 1.0);
-    }
-    """
+    @EnvironmentObject var dataModel: DataModel
     
     var body: some View {
         OrientationSensitiveStack(
             orientation: $orientation,
-            editor: EditorView($code),
-            preview: PreviewView($code)
+            editor: EditorView(),
+            preview: PreviewView()
         )
         .onReceive(
             NotificationCenter.default.publisher(

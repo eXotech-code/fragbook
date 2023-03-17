@@ -8,61 +8,36 @@
 import MetalKit
 
 class Renderer: NSObject, MTKViewDelegate {
-    var parent: RenderedView?
-    var metalDevice: MTLDevice!
-    var pipelineState: MTLRenderPipelineState!
+    var parent: RenderedView
     var metalCommandQueue: MTLCommandQueue!
     let vertexBuffer: MTLBuffer
+    let indexBuffer: MTLBuffer
     
-    init(fragCode: String) {
-        self.parent = nil
+    init(parent: RenderedView) {
+        self.parent = parent
         
-        if let metalDevice = MTLCreateSystemDefaultDevice() {
-            self.metalDevice = metalDevice
-        }
-        self.metalCommandQueue = metalDevice.makeCommandQueue()
+        self.metalCommandQueue = parent.dataModel.metalDevice.makeCommandQueue()
         
         let vertices = [
             Vertex(position: [-1, -1], color: [1, 0, 0, 1]),
             Vertex(position: [1, -1], color: [0, 1, 0, 1]),
-            Vertex(position: [0, 1], color: [0, 0, 1, 1])
+            Vertex(position: [1, 1], color: [0, 0, 1, 1]),
+            Vertex(position: [-1, 1], color: [1, 1, 1, 1])
         ]
         
-        vertexBuffer = metalDevice.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<Vertex>.stride, options: [])!
+        vertexBuffer = parent.dataModel.metalDevice.makeBuffer(bytes: vertices, length: vertices.count * MemoryLayout<Vertex>.stride, options: [])!
+        
+        let indices: Array<UInt16> = [
+            0, 1, 3,
+            1, 2, 3
+        ]
+        
+        indexBuffer = parent.dataModel.metalDevice.makeBuffer(bytes: indices, length: indices.count * MemoryLayout<UInt16>.stride, options: [])!
         
         super.init()
     }
     
-    func setParent(_ parent: RenderedView) {
-        self.parent = parent
-    }
-    
-    func createPipelineState(with: String) {
-        let pipelineDescriptor = MTLRenderPipelineDescriptor()
-        let defaultLibrary = metalDevice.makeDefaultLibrary()
-        let fragmentLibrary = try? metalDevice.makeLibrary(
-            source: with,
-            options: nil
-        )
-        let fragmentFunction = fragmentLibrary?.makeFunction(name: "fragmentShader")
-        
-        pipelineDescriptor.vertexFunction = defaultLibrary?.makeFunction(name: "vertexShader")
-        pipelineDescriptor.fragmentFunction = fragmentFunction
-        pipelineDescriptor.colorAttachments[0].pixelFormat = .bgra8Unorm
-        
-        let state: MTLRenderPipelineState
-        do {
-            state = try metalDevice.makeRenderPipelineState(descriptor: pipelineDescriptor)
-        } catch {
-            fatalError("Unable to create render pipeline descriptor.")
-        }
-        
-        self.pipelineState = state
-    }
-    
-    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        
-    }
+    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {}
     
     func draw(in view: MTKView) {
         guard let drawable = view.currentDrawable else {
@@ -78,9 +53,9 @@ class Renderer: NSObject, MTKViewDelegate {
         renderPassDescriptor?.colorAttachments[0].storeAction = .store
         
         let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor!)
-        renderEncoder?.setRenderPipelineState(pipelineState)
+        renderEncoder?.setRenderPipelineState(parent.dataModel.pipelineState!)
         renderEncoder?.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-        renderEncoder?.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: 3)
+        renderEncoder?.drawIndexedPrimitives(type: .triangle, indexCount: 6, indexType: .uint16, indexBuffer: self.indexBuffer, indexBufferOffset: 0)
         renderEncoder?.endEncoding()
         
         commandBuffer.present(drawable)

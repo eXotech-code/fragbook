@@ -7,30 +7,36 @@
 
 import SwiftUI
 
-struct EditorView: View {
-    var code: Binding<String>
-    
-    init(_ code: Binding<String>) {
-        self.code = code
+extension Binding {
+    func onChange(_ handler: @escaping (Value) -> Void) -> Binding<Value> {
+        Binding(
+            get: { self.wrappedValue },
+            set: { newValue in
+                self.wrappedValue = newValue
+                handler(newValue)
+            }
+        )
     }
+}
+
+struct EditorView: View {
+    @EnvironmentObject var dataModel: DataModel
+    @State var code: String = initialShader
     
     var body: some View {
-        TextEditor(text: self.code)
-            .monospaced()
-            .padding()
+        VStack {
+            TextEditor(text: $code.onChange(dataModel.compileShader))
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+                .monospaced()
+                .padding()
+            StatusView()
+        }
     }
 }
 
 struct EditorView_Previews: PreviewProvider {
     static var previews: some View {
-        EditorView(
-            .constant(
-                    """
-                    fragment float4 fragmentShader() {
-                        return float4(1.0, 0.0, 0.0, 1.0);
-                    }
-                    """
-            )
-        )
+        EditorView()
     }
 }

@@ -17,6 +17,10 @@
 		3B30BB4729C39CED0063B763 /* RenderedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B30BB4629C39CED0063B763 /* RenderedView.swift */; };
 		3B30BB4929C39D360063B763 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B30BB4829C39D360063B763 /* Renderer.swift */; };
 		3B30BB4C29C44FC00063B763 /* Vertex.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3B30BB4B29C44FC00063B763 /* Vertex.metal */; };
+		3BB2793B29C4D3F8003864A8 /* StatusIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB2793A29C4D3F8003864A8 /* StatusIndicatorView.swift */; };
+		3BB2793F29C4DE8E003864A8 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB2793E29C4DE8E003864A8 /* DataModel.swift */; };
+		3BB364C029C4C5070095654F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB364BF29C4C5070095654F /* Constants.swift */; };
+		3BB364C629C4D2990095654F /* StatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB364C529C4D2990095654F /* StatusView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +36,10 @@
 		3B30BB4829C39D360063B763 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		3B30BB4A29C3A6FE0063B763 /* definitions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = definitions.h; sourceTree = "<group>"; };
 		3B30BB4B29C44FC00063B763 /* Vertex.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Vertex.metal; sourceTree = "<group>"; };
+		3BB2793A29C4D3F8003864A8 /* StatusIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusIndicatorView.swift; sourceTree = "<group>"; };
+		3BB2793E29C4DE8E003864A8 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		3BB364BF29C4C5070095654F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		3BB364C529C4D2990095654F /* StatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +74,11 @@
 			children = (
 				3B30BB3029C376F00063B763 /* FragBookApp.swift */,
 				3B30BB3229C376F00063B763 /* ContentView.swift */,
+				3BB364C529C4D2990095654F /* StatusView.swift */,
+				3BB2793A29C4D3F8003864A8 /* StatusIndicatorView.swift */,
+				3BB364BF29C4C5070095654F /* Constants.swift */,
 				3B30BB4629C39CED0063B763 /* RenderedView.swift */,
+				3BB2793E29C4DE8E003864A8 /* DataModel.swift */,
 				3B30BB4829C39D360063B763 /* Renderer.swift */,
 				3B30BB4B29C44FC00063B763 /* Vertex.metal */,
 				3B30BB4A29C3A6FE0063B763 /* definitions.h */,
@@ -159,12 +171,16 @@
 			files = (
 				3B30BB4529C381EB0063B763 /* OrientationSensitiveStack.swift in Sources */,
 				3B30BB3F29C378070063B763 /* EditorView.swift in Sources */,
+				3BB364C629C4D2990095654F /* StatusView.swift in Sources */,
 				3B30BB4929C39D360063B763 /* Renderer.swift in Sources */,
 				3B30BB4C29C44FC00063B763 /* Vertex.metal in Sources */,
 				3B30BB4129C37ACB0063B763 /* PreviewView.swift in Sources */,
+				3BB2793F29C4DE8E003864A8 /* DataModel.swift in Sources */,
 				3B30BB3329C376F00063B763 /* ContentView.swift in Sources */,
 				3B30BB3129C376F00063B763 /* FragBookApp.swift in Sources */,
 				3B30BB4729C39CED0063B763 /* RenderedView.swift in Sources */,
+				3BB364C029C4C5070095654F /* Constants.swift in Sources */,
+				3BB2793B29C4D3F8003864A8 /* StatusIndicatorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

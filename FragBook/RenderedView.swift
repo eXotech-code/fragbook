@@ -5,22 +5,14 @@
 //  Created by Jakub Piskiewicz on 16/03/2023.
 //
 
-import SwiftUI
 import MetalKit
+import SwiftUI
 
 struct RenderedView: UIViewRepresentable {
-    public var code: Binding<String>
-    let coordinator: Renderer
-    
-    init(_ code: Binding<String>) {
-        self.code = code
-        coordinator = Renderer(fragCode: code.wrappedValue)
-    }
+    @EnvironmentObject var dataModel: DataModel
     
     func makeCoordinator() -> Renderer {
-        coordinator.setParent(self)
-        coordinator.createPipelineState(with: code.wrappedValue)
-        return coordinator
+        Renderer(parent: self)
     }
     
     func makeUIView(context: UIViewRepresentableContext<RenderedView>) -> MTKView {
@@ -40,21 +32,12 @@ struct RenderedView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: MTKView, context: UIViewRepresentableContext<RenderedView>) {
-        // Replace the old shader code with the current one.
-        coordinator.createPipelineState(with: code.wrappedValue)
+        uiView.setNeedsDisplay()
     }
 }
 
 struct RenderedView_Previews: PreviewProvider {
     static var previews: some View {
-        RenderedView(
-            .constant(
-                    """
-                    fragment float4 fragmentShader() {
-                        return float4(1.0, 0.0, 0.0, 1.0);
-                    }
-                    """
-            )
-        )
+        RenderedView()
     }
 }
