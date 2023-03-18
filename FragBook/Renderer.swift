@@ -64,6 +64,7 @@ class Renderer: NSObject, MTKViewDelegate {
         let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor!)
         renderEncoder?.setRenderPipelineState(parent.dataModel.pipelineState!)
         renderEncoder?.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
+        self.parent.dataModel.refreshUniforms()
         renderEncoder?.setFragmentBuffer(self.timeBuffer, offset: 0, index: 0)
         renderEncoder?.drawIndexedPrimitives(type: .triangle, indexCount: 6, indexType: .uint16, indexBuffer: self.indexBuffer, indexBufferOffset: 0)
         renderEncoder?.endEncoding()

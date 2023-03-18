@@ -61,7 +61,6 @@ class DataModel : ObservableObject {
     
     func setUniforms(_ uniforms: UnsafeMutablePointer<Uniforms>) {
         self.uniforms = uniforms
-        self.startRefreshingTimeBuffer()
     }
     
     func resetTime() {
@@ -79,9 +78,7 @@ class DataModel : ObservableObject {
         self.uniforms![0].time = with
     }
     
-    func startRefreshingTimeBuffer() {
-        Timer.scheduledTimer(withTimeInterval: 0.016, repeats: true, block: { _ in
-            self.updateTimeBuffer(with: self.getTime())
-        })
+    func refreshUniforms() {
+        self.updateTimeBuffer(with: self.getTime())
     }
 }
