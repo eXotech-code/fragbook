@@ -21,6 +21,6 @@ struct RasterizerData {
 fragment float4 fragmentShader(constant Uniforms &uniforms [[buffer(0)]], RasterizerData in [[stage_in]]) {
     float time = uniforms.time;
 
-    return float4(float3(1.0 - in.textureCoordinate.y), 1.0);
+    return float4(float3(1.0 - sin(in.textureCoordinate.y + time)), 1.0);
 }
 """

@@ -43,15 +43,10 @@ class Renderer: NSObject, MTKViewDelegate {
         self.indexBuffer = parent.dataModel.metalDevice.makeBuffer(bytes: indices, length: indices.count * MemoryLayout<UInt16>.stride, options: [])!
         self.timeBuffer = createTimeBuffer(parent, currentTime: parent.dataModel.getTime())
         super.init()
+        setDataModelUniforms(self.timeBuffer)
     }
     
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {}
-    
-    func updateTimeBuffer(with: Float) {
-        let uniforms = UnsafeMutableRawPointer(self.timeBuffer.contents())
-            .bindMemory(to: Uniforms.self, capacity: 1)
-        uniforms[0].time = with
-    }
     
     func draw(in view: MTKView) {
         guard let drawable = view.currentDrawable else {
@@ -69,12 +64,17 @@ class Renderer: NSObject, MTKViewDelegate {
         let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor!)
         renderEncoder?.setRenderPipelineState(parent.dataModel.pipelineState!)
         renderEncoder?.setVertexBuffer(vertexBuffer, offset: 0, index: 0)
-        self.updateTimeBuffer(with: self.parent.dataModel.time)
         renderEncoder?.setFragmentBuffer(self.timeBuffer, offset: 0, index: 0)
         renderEncoder?.drawIndexedPrimitives(type: .triangle, indexCount: 6, indexType: .uint16, indexBuffer: self.indexBuffer, indexBufferOffset: 0)
         renderEncoder?.endEncoding()
         
         commandBuffer.present(drawable)
         commandBuffer.commit()
+    }
+    
+    func setDataModelUniforms(_ timeBuffer: MTLBuffer) {
+        let uniforms = UnsafeMutableRawPointer(timeBuffer.contents())
+            .bindMemory(to: Uniforms.self, capacity: 1)
+        self.parent.dataModel.setUniforms(uniforms)
     }
 }

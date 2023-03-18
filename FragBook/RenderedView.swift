@@ -19,7 +19,8 @@ struct RenderedView: UIViewRepresentable {
         let mtkView = MTKView()
         mtkView.delegate = context.coordinator
         mtkView.preferredFramesPerSecond = 60
-        mtkView.enableSetNeedsDisplay = true
+        mtkView.enableSetNeedsDisplay = false
+        mtkView.isPaused = false
         
         if let metalDevice = MTLCreateSystemDefaultDevice() {
             mtkView.device = metalDevice

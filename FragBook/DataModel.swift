@@ -18,16 +18,15 @@ class DataModel : ObservableObject {
     @Published var status: Status = .compiling
     @Published var metalDevice: MTLDevice = MTLCreateSystemDefaultDevice()!
     @Published var pipelineState: MTLRenderPipelineState!
-    @Published var time: Float = 0
     let clock: ContinuousClock
     var startTime: ContinuousClock.Instant
+    var uniforms: UnsafeMutablePointer<Uniforms>?
     
     init() {
         let clock = ContinuousClock()
         self.startTime = clock.now
         self.clock = clock
         self.compileShader(newCode: initialShader)
-        self.startRefreshingTime()
     }
     
     func compileShader(newCode: String) {
@@ -60,6 +59,11 @@ class DataModel : ObservableObject {
         self.pipelineState = state
     }
     
+    func setUniforms(_ uniforms: UnsafeMutablePointer<Uniforms>) {
+        self.uniforms = uniforms
+        self.startRefreshingTimeBuffer()
+    }
+    
     func resetTime() {
         self.startTime = self.clock.now;
     }
@@ -71,9 +75,13 @@ class DataModel : ObservableObject {
         return seconds + attoseconds * pow(10, -18)
     }
     
-    func startRefreshingTime() {
+    func updateTimeBuffer(with: Float) {
+        self.uniforms![0].time = with
+    }
+    
+    func startRefreshingTimeBuffer() {
         Timer.scheduledTimer(withTimeInterval: 0.016, repeats: true, block: { _ in
-            self.time = self.getTime()
+            self.updateTimeBuffer(with: self.getTime())
         })
     }
 }
