@@ -41,6 +41,8 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .previewInterfaceOrientation(.landscapeLeft)
+            .previewDevice("iPad Air (5th generation)")
             .environmentObject(DataModel())
     }
 }

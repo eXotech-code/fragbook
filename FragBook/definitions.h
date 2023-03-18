@@ -15,4 +15,9 @@ struct Vertex {
     vector_float2 textureCoordinate;
 };
 
+// Unforms used by the fragment shader
+struct Uniforms {
+    float time;
+};
+
 #endif /* definitions_h */

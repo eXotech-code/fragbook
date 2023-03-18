@@ -18,13 +18,21 @@ class DataModel : ObservableObject {
     @Published var status: Status = .compiling
     @Published var metalDevice: MTLDevice = MTLCreateSystemDefaultDevice()!
     @Published var pipelineState: MTLRenderPipelineState!
+    @Published var time: Float = 0
+    let clock: ContinuousClock
+    var startTime: ContinuousClock.Instant
     
     init() {
-        compileShader(newCode: initialShader)
+        let clock = ContinuousClock()
+        self.startTime = clock.now
+        self.clock = clock
+        self.compileShader(newCode: initialShader)
+        self.startRefreshingTime()
     }
     
     func compileShader(newCode: String) {
         self.status = .compiling
+        self.resetTime()
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
         let defaultLibrary = metalDevice.makeDefaultLibrary()
         let fragmentLibrary = try? metalDevice.makeLibrary(
@@ -50,5 +58,22 @@ class DataModel : ObservableObject {
         }
         
         self.pipelineState = state
+    }
+    
+    func resetTime() {
+        self.startTime = self.clock.now;
+    }
+    
+    func getTime() -> Float {
+        let components = self.startTime.duration(to: self.clock.now).components
+        let seconds = Float(components.seconds)
+        let attoseconds = Float(components.attoseconds)
+        return seconds + attoseconds * pow(10, -18)
+    }
+    
+    func startRefreshingTime() {
+        Timer.scheduledTimer(withTimeInterval: 0.016, repeats: true, block: { _ in
+            self.time = self.getTime()
+        })
     }
 }

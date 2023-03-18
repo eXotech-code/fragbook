@@ -29,7 +29,7 @@ struct EditorView: View {
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
                 .monospaced()
-                .padding()
+                .padding(.leading)
             StatusView()
         }
     }
