@@ -8,12 +8,11 @@
 import SwiftUI
 
 extension Binding {
-    func onChange(_ handler: @escaping (Value) -> Void) -> Binding<Value> {
+    func onChange(_ handler: @escaping (Value) -> Value) -> Binding<Value> {
         Binding(
             get: { self.wrappedValue },
             set: { newValue in
-                self.wrappedValue = newValue
-                handler(newValue)
+                self.wrappedValue = handler(newValue)
             }
         )
     }
@@ -21,15 +20,19 @@ extension Binding {
 
 struct EditorView: View {
     @EnvironmentObject var dataModel: DataModel
-    @State var code: String = initialShader
+    @State var code = initialCodeValue
     
     var body: some View {
         VStack {
-            TextEditor(text: $code.onChange(dataModel.compileShader))
+            TextEditor(text: $code.onChange(dataModel.setCode))
                 .textInputAutocapitalization(.never)
                 .autocorrectionDisabled()
                 .monospaced()
                 .padding(.leading)
+                .onAppear(perform: {
+                    code = dataModel.setCode(code)
+                    
+                })
             StatusView()
         }
     }

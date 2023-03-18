@@ -18,6 +18,7 @@ class DataModel : ObservableObject {
     @Published var status: Status = .compiling
     @Published var metalDevice: MTLDevice = MTLCreateSystemDefaultDevice()!
     @Published var pipelineState: MTLRenderPipelineState!
+    var code: String = initialCodeValue
     let clock: ContinuousClock
     var startTime: ContinuousClock.Instant
     var uniforms: UnsafeMutablePointer<Uniforms>?
@@ -26,10 +27,10 @@ class DataModel : ObservableObject {
         let clock = ContinuousClock()
         self.startTime = clock.now
         self.clock = clock
-        self.compileShader(newCode: initialShader)
+        _ = self.setCode(initialShader)
     }
     
-    func compileShader(newCode: String) {
+    func compileShader(_ newCode: String) {
         self.status = .compiling
         self.resetTime()
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
@@ -57,6 +58,17 @@ class DataModel : ObservableObject {
         }
         
         self.pipelineState = state
+    }
+    
+    func setCode(_ code: String) -> String {
+        var newCode = code
+        if newCode == initialCodeValue {
+            newCode = self.code
+        }
+        
+        self.compileShader(newCode)
+        self.code = newCode
+        return newCode
     }
     
     func setUniforms(_ uniforms: UnsafeMutablePointer<Uniforms>) {

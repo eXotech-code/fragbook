@@ -20,7 +20,10 @@ struct RasterizerData {
 
 fragment float4 fragmentShader(constant Uniforms &uniforms [[buffer(0)]], RasterizerData in [[stage_in]]) {
     float time = uniforms.time;
+    float2 pos = in.textureCoordinate;
 
-    return float4(float3(1.0 - sin(in.textureCoordinate.y + time)), 1.0);
+    return float4(float3(pos.x), 1.0);
 }
 """
+
+let initialCodeValue = "INITIAL"
